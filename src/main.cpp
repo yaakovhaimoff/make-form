@@ -11,27 +11,27 @@
 #include "Form.h"
 
 // A class that represents a field. A field can have one or more validator
-#include "Field.h"
+#include "FieldInc/Field.h"
 
 // A class that represents a range validator.
 // It validates if a field value is in some range.
 // The type used as template parameter must implement < and > operators.
-#include "ValidatorsInc/RangeValidator.h"
+#include "FieldsValidatorsInc/RangeValidator.h"
 
 // A class that represents a minimal value validator.
 // It validates if a field value is not less than some minimal value.
 // The type used as template parameter must implement > operator and support to_string() function.
-#include "ValidatorsInc/MinValidator.h"
+#include "FieldsValidatorsInc/MinValidator.h"
 
 // A class that represents a no-digit-characters validator.
 // It validates that the field value contains no digits.
 // Works only on std::string.
-#include "ValidatorsInc/NoDigitValidator.h"
+#include "FieldsValidatorsInc/NoDigitValidator.h"
 
 // A class that represents an ID validator.
 // ID validation is done using the control digit.
 // Works only on the type 'uint32_t'.
-#include "ValidatorsInc/IdValidator.h"
+#include "FieldsValidatorsInc/IdValidator.h"
 
 // A class that represents the value use for faculty field.
 // The class must override the << and >> operators.
@@ -42,12 +42,12 @@
 // A class that represents a faculty-vs.-year validator.
 // It checks if the faculty and year supplied matches each other.
 // The types used as template parameter must be Field.
-#include "ValidatorsInc/Faculty2YearValidator.h"
+#include "FormValidatorsInc/Faculty2YearValidator.h"
 
 // A class that represents a courses-vs.-year validator.
 // It checks if the course count and year supplied matches each other.
 // The types used as template parameter must be Field.
-#include "ValidatorsInc/Courses2YearValidator.h"
+#include "FormValidatorsInc/Courses2YearValidator.h"
 
 //------------------- Function declarations ----------------------------
 
@@ -83,8 +83,6 @@ int main()
 {
 	// Creating the form fields
 	auto nameField = std::make_unique<Field<std::string>>("What is your name?");
-	// equivalent to:
-	// std::unique_ptr<Field<std::string>> nameField(new Field<std::string>("What is your name?"));
 	auto idField = std::make_unique<Field<uint32_t>>("What is your ID?");
 	auto yearOfBirthField = std::make_unique<Field<int>>("What is your year of birth?");
 	auto facultyField = std::make_unique<Field<FacultyValue>>("What faculty are you registering to?\n"
@@ -96,10 +94,11 @@ int main()
 	// Creating the field validators
 	auto nameValidator = std::make_unique<NoDigitValidator>();
 	auto idValidator = std::make_unique<IDValidator>();
+	auto courseValidator = std::make_unique<MinValidator<short>>(2);
+	// Creating RangeValidators
 	auto ageValidator = std::make_unique<RangeValidator<int>>(currentYear() - MAX_AGE, currentYear() - MIN_AGE);
 	auto facultyValidator = std::make_unique<RangeValidator<FacultyValue>>(1, 3);
 	auto yearValidator = std::make_unique<RangeValidator<int>>(1, MAX_POSSIBLE_YEAR);
-	auto courseValidator = std::make_unique<MinValidator<short>>(2);
 
 	// Adding the validators to the fields
 	nameField->addValidator(nameValidator.get());
@@ -151,12 +150,12 @@ int main()
 	displayGoodbyeMessage();
 	displayFormFields(myForm);
 }
-
+//______________________________________
 void displayFormFields(const Form& form)
 {
 	std::cout << form << '\n';
 }
-
+//__________________________
 void displayWelcomeMessage()
 {
 	std::cout << MESSAGE_LINE;
@@ -164,7 +163,7 @@ void displayWelcomeMessage()
 		"Hello and welcome!", "In order to register please fill in the fields below");
 	std::cout << MESSAGE_LINE;
 }
-
+//________________________
 void displayErrorMessage()
 {
 	std::cout << MESSAGE_LINE;
@@ -172,7 +171,7 @@ void displayErrorMessage()
 		"There was an error in at least one of the fields!", "Please correct the error(s)");
 	std::cout << MESSAGE_LINE;
 }
-
+//__________________________
 void displayGoodbyeMessage()
 {
 	std::cout << MESSAGE_LINE;
@@ -180,7 +179,7 @@ void displayGoodbyeMessage()
 		"Thank you!", "This is the data you sent:");
 	std::cout << MESSAGE_LINE;
 }
-
+//________________
 void clearScreen()
 {
 #ifdef WIN32
@@ -189,8 +188,7 @@ void clearScreen()
 	system("clear");
 #endif
 }
-
-
+//_______________
 int currentYear()
 {
 	namespace C = std::chrono;
