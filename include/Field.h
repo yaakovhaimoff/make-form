@@ -1,11 +1,12 @@
 #pragma once
+#include <string>
 
 // class template:
 template <class T>
 class Field
 {
 public:
-    Field(const T& arg) : m_element(arg) {}
+    Field(const std::string);
 
 private:
     T m_element;
