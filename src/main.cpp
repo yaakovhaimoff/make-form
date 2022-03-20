@@ -16,22 +16,22 @@
 // A class that represents a range validator.
 // It validates if a field value is in some range.
 // The type used as template parameter must implement < and > operators.
-#include "RangeValidator.h"
+#include "ValidatorsInc/RangeValidator.h"
 
 // A class that represents a minimal value validator.
 // It validates if a field value is not less than some minimal value.
 // The type used as template parameter must implement > operator and support to_string() function.
-#include "MinValidator.h"
+#include "ValidatorsInc/MinValidator.h"
 
 // A class that represents a no-digit-characters validator.
 // It validates that the field value contains no digits.
 // Works only on std::string.
-#include "NoDigitValidator.h"
+#include "ValidatorsInc/NoDigitValidator.h"
 
 // A class that represents an ID validator.
 // ID validation is done using the control digit.
 // Works only on the type 'uint32_t'.
-#include "IdValidator.h"
+#include "ValidatorsInc/IdValidator.h"
 
 // A class that represents the value use for faculty field.
 // The class must override the << and >> operators.
@@ -42,12 +42,12 @@
 // A class that represents a faculty-vs.-year validator.
 // It checks if the faculty and year supplied matches each other.
 // The types used as template parameter must be Field.
-#include "Faculty2YearValidator.h"
+#include "ValidatorsInc/Faculty2YearValidator.h"
 
 // A class that represents a courses-vs.-year validator.
 // It checks if the course count and year supplied matches each other.
 // The types used as template parameter must be Field.
-#include "Courses2YearValidator.h"
+#include "ValidatorsInc/Courses2YearValidator.h"
 
 //------------------- Function declarations ----------------------------
 
