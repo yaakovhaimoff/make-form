@@ -15,7 +15,7 @@ private:
     T m_element;
     std::vector<BaseFieldValidators<T>*> m_validator;
 };
-
+//________________
 template <class T>
 void Field<T>::addValidator(const BaseFieldValidators<T>* validator)
 {
