@@ -26,5 +26,8 @@ bool Form::validateForm()
 //___________________
 void Form::fillForm()
 {
-
+	for (auto field : m_baseField)
+	{
+		field->readElement();
+	}
 }

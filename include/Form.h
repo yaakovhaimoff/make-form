@@ -16,4 +16,5 @@ public:
 private:
 	std::vector<BaseField*> m_baseField;
 	std::vector<FormValidators*> m_formValidators;
+	
 };
