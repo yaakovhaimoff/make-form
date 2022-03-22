@@ -1,4 +1,5 @@
 #pragma once
+
 #include "FieldInc/BaseField.h"
 #include "FormValidatorsInc/FormValidators.h"
 #include <vector>
@@ -11,8 +12,8 @@ public:
 	void addValidator(const FormValidators*);
 	bool validateForm();
 	void fillForm();
-
+	
 private:
-	std::vector<BaseField> m_baseField;
-	std::vector<FormValidators> m_formValidators;
+	std::vector<BaseField*> m_baseField;
+	std::vector<FormValidators*> m_formValidators;
 };

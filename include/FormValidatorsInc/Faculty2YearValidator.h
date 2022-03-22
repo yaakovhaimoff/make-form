@@ -6,5 +6,5 @@ template <class T1, class T2>
 class Faculty2YearValidator : public FormValidators
 {
 public:
-	Faculty2YearValidator(const BaseField*, const BaseField*){}
+	Faculty2YearValidator(const BaseField* field1, const BaseField* field2) : FormValidators(field1, field2) {}
 };

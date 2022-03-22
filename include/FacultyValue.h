@@ -1,14 +1,18 @@
 #pragma once
+#include <iostream>
+#include <string>
 
 class FacultyValue
 {
 public:
-	FacultyValue() {}
-	/*FacultyValue(const int year, int numOfCourses) : m_year(year),
-		m_numOfCourses(numOfCourses) {}*/
+	FacultyValue() { ; }
+	~FacultyValue() {}
+	void setValue(const int);
+	int getValue()const;
+	void printName(const std::string)const;
 
 private:
-	int m_year = 0;
-	int m_numOfCourses = 0;
+	int m_value;
 };
-std::ostream& operator<<(std::ostream&, const std::string&);
+std::istream &operator>>(std::istream&, FacultyValue&);
+std::ostream& operator<<(std::ostream&, const FacultyValue&);

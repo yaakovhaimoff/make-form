@@ -13,4 +13,18 @@ void Form::addValidator(const FormValidators* formValidator)
 //_______________________
 bool Form::validateForm()
 {
+	bool validate = true;
+	for (auto field : m_baseField)
+	{
+		if (field->checkValidator())
+		{
+			validate = false;
+		}
+	}
+	return validate;
+}
+//___________________
+void Form::fillForm()
+{
+
 }

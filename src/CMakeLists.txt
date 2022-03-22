@@ -1,6 +1,7 @@
-﻿target_sources (oop2_ex02 PRIVATE "main.cpp"
+﻿target_sources (ex2 PRIVATE "main.cpp"
+                                  "Form.cpp"
+                                  "Field.cpp"
+                                  "FacultyValue.cpp"
                                   "FieldsValidatorsSrc/IDValidator.cpp"
                                   "FieldsValidatorsSrc/NoDigitValidator.cpp"
-                                  "FieldsValidatorsSrc/MinValidator.cpp"
-                                  "Form.cpp"
                                  )

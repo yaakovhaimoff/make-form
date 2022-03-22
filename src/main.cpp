@@ -31,7 +31,7 @@
 // A class that represents an ID validator.
 // ID validation is done using the control digit.
 // Works only on the type 'uint32_t'.
-#include "FieldsValidatorsInc/IdValidator.h"
+#include "FieldsValidatorsInc/IDValidator.h"
 
 // A class that represents the value use for faculty field.
 // The class must override the << and >> operators.
@@ -131,6 +131,7 @@ int main()
 	clearScreen();
 	displayWelcomeMessage();
 
+
 	// Get the input only for empty or not valid fields
 	myForm.fillForm();
 
@@ -151,9 +152,9 @@ int main()
 	displayFormFields(myForm);
 }
 //______________________________________
-void displayFormFields(const Form& form)
+void displayFormFields(const Form& /*form*/)
 {
-	std::cout << form << '\n';
+	//std::cout << form << '\n';
 }
 //__________________________
 void displayWelcomeMessage()
