@@ -5,7 +5,8 @@
 class FacultyValue
 {
 public:
-	FacultyValue() : m_value(0) { ; }
+	FacultyValue(const int val) : m_value(val) { ; }
+	FacultyValue() = default;
 	~FacultyValue() {}
 	void setValue(const int);
 	int getValue()const;
@@ -16,11 +17,11 @@ private:
 };
 std::istream &operator>>(std::istream&, FacultyValue&);
 std::ostream& operator<<(std::ostream&, const FacultyValue&);
-bool operator <(const FacultyValue& value, const int max)
+bool operator <=(const FacultyValue& value, const FacultyValue& max)
 {
-	return value.getValue() <= max;
+	return value.getValue() <= max.getValue();
 }
-bool operator >(const FacultyValue& value, const int min)
+bool operator >=(const FacultyValue& value, const FacultyValue& min)
 {
-	return value.getValue() >= min;
+	return value.getValue() >= min.getValue();
 }

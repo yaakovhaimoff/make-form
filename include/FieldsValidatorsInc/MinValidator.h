@@ -6,15 +6,20 @@ template <class T>
 class MinValidator : public BaseFieldValidators<T>
 {
 public:
-    MinValidator(T element) : m_minElement(element){}
-    bool validate(const T&)override;
+	MinValidator(const T&);
+	bool validate(const T&)const override;
+	void printError()const {} ;
 
 private:
-    T m_minElement;
+	T m_minElement{};
 };
 //________________
 template <class T>
-bool MinValidator<T>::validate(const T& numOfCousre)
+MinValidator<T>::MinValidator(const T& element)
+	:m_minElement(element){}
+//________________
+template <class T>
+bool MinValidator<T>::validate(const T& numOfCousre)const
 {
-    return m_minElement < numOfCousre;
+	return m_minElement < numOfCousre;
 }

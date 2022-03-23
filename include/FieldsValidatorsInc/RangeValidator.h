@@ -7,16 +7,16 @@ template <class T>
 class RangeValidator : public BaseFieldValidators<T>
 {
 public:
-    RangeValidator(const int min, const int max) : m_min(min), m_max(max) {}
-    bool validate(const T&)override;
-    void printError()const { std::cout << "Out of range\n"; }
+    RangeValidator(const T& min, const T& max) : m_min(min), m_max(max) {}
+    bool validate(const T&)const;
+    void printError()const { std::cout << std::string(N - 30, ' ') << "Out of range\n" << std::string(N, '-'); }
 
 private:
-    int m_min, m_max;
+    T m_min{}, m_max{};
 };
 //________________
 template <class T>
-bool RangeValidator<T>::validate(const T& value)
+bool RangeValidator<T>::validate(const T& value)const
 {
-    return value > m_min && value < m_max;
+    return value >= m_min && value <= m_max;
 }
