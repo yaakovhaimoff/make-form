@@ -7,8 +7,8 @@ class MinValidator : public BaseFieldValidators<T>
 {
 public:
 	MinValidator(const T&);
+	MinValidator() = default;
 	bool validate(const T&)const override;
-	void printError()const {} ;
 
 private:
 	T m_minElement{};
@@ -16,7 +16,8 @@ private:
 //________________
 template <class T>
 MinValidator<T>::MinValidator(const T& element)
-	:m_minElement(element){}
+	: BaseFieldValidators<T>("Out of range\n"), m_minElement(element)
+{}
 //________________
 template <class T>
 bool MinValidator<T>::validate(const T& numOfCousre)const

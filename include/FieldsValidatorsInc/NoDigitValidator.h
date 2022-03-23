@@ -5,7 +5,6 @@
 class NoDigitValidator : public BaseFieldValidators<std::string>
 {
 public:
-	NoDigitValidator() {}
+	NoDigitValidator() : BaseFieldValidators("Can't contain digits\n"){}
 	bool validate(const std::string&)const;
-	void printError()const { std::cout << std::string(N -30, ' ')  << "Can't contain digits\n" << std::string(N, '-'); }
 };

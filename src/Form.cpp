@@ -23,24 +23,16 @@ bool Form::validateForm()
 void Form::fillForm()
 {
 	for (auto field : m_baseField)
-	{
 		if (!field->getValid())
-		{
 			field->readElement();
-		}
-	}
 }
-
 //_______________________________________________________________________
 std::ostream& operator<<(std::ostream& output, const Form& form)
 {
 	for (size_t i = 0; i < form.fieldsNum(); i++)
-	{
 		form.printField(i);
-	}
 	return output;
 }
-
 void Form::printField(size_t place)const
 {
 	if (!m_baseField[place]->getValid())
