@@ -13,11 +13,17 @@ void Form::addValidator(FormValidators* formValidator)
 //_______________________
 bool Form::validateForm()
 {
-	bool validate = true;
+	m_validForm = true;
 	for (auto field : m_baseField)
 		if (!field->checkValidator())
-			validate = false;
-	return validate;
+			m_validForm = false;
+
+	if (m_validForm)
+		for (auto formValidator : m_formValidators)
+			if (!formValidator->validateForm())
+				m_validForm = false;
+
+	return m_validForm;
 }
 //___________________
 void Form::fillForm()
@@ -26,7 +32,7 @@ void Form::fillForm()
 		if (!field->getValid())
 			field->readElement();
 }
-//_______________________________________________________________________
+//______________________________________________________________
 std::ostream& operator<<(std::ostream& output, const Form& form)
 {
 	for (size_t i = 0; i < form.fieldsNum(); i++)
@@ -41,5 +47,12 @@ void Form::printField(size_t place)const
 		std::cout << " = ";
 		m_baseField[place]->printElement();
 		m_baseField[place]->printError();
+	}
+	else
+	{
+		m_baseField[place]->show();
+		std::cout << " = ";
+		m_baseField[place]->printElement();
+		std::cout << std::endl << std::string(60, '-') << std::endl;
 	}
 }

@@ -7,7 +7,7 @@
 class Form 
 {
 public:
-	Form(){}
+	Form() : m_validForm(false) {}
 	void addField(BaseField*);
 	void addValidator(FormValidators*);
 	bool validateForm();
@@ -18,6 +18,6 @@ public:
 private:
 	std::vector<BaseField*> m_baseField;
 	std::vector<FormValidators*> m_formValidators;
-	
+	bool m_validForm;
 };
 std::ostream& operator<<(std::ostream&, const Form&);

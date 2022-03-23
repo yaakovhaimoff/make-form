@@ -15,6 +15,7 @@ public:
 	void readElement();
 	void printElement()const;
 	void printError()const;
+	T getElement()const { return m_element; }
 
 private:
 	T m_element {};

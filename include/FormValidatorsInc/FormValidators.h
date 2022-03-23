@@ -7,5 +7,6 @@ class FormValidators
 public:
 	FormValidators() = default;
 	~FormValidators() = default;
+	virtual bool validateForm()const = 0;
 };
 
