@@ -4,7 +4,12 @@
 template <class T>
 bool Field<T>::checkValidator()
 {
-	m_validator->validator(m_element);
+	if (m_validator->validator(m_element))
+	{
+		setValid(true);
+		return true;
+	}
+	return false;
 }
 //________________
 template <class T>

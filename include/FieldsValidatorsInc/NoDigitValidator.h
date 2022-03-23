@@ -6,6 +6,6 @@ class NoDigitValidator : public BaseFieldValidators<std::string>
 {
 public:
 	NoDigitValidator() {}
-	bool validate(const std::string&, const std::string&);
+	bool validate(const std::string&);
 
 };

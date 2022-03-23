@@ -1,33 +1,21 @@
 #pragma once
 #include "FieldsValidatorsInc/BaseFieldValidators.h"
+#include "FacultyValue.h"
 
 // class template:
 template <class T>
 class RangeValidator : public BaseFieldValidators<T>
 {
 public:
-    RangeValidator(const int, const int);
-    bool validate(const T&, const T&)override;
+    RangeValidator(const int min, const int max) : m_min(min), m_max(max) {}
+    bool validate(const T&)override;
 
 private:
     int m_min, m_max;
 };
 //________________
 template <class T>
-bool RangeValidator<T>::validate(const T& year, const T&)
+bool RangeValidator<T>::validate(const T& value)
 {
-    //return year >= m_min && year <= m_max;
-    return true;
+    return value > m_min && value < m_max;
 }
-////________________
-//template <class T>
-//bool operator <=(const T& year1, const int year2)
-//{
-//    return (int*)year1 <= year2;
-//}
-////________________
-//template <class T>
-//bool operator >=(const T& year1, const int year2)
-//{
-//    return (int*)year1 >= year2;
-//}

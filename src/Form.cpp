@@ -15,19 +15,14 @@ bool Form::validateForm()
 {
 	bool validate = true;
 	for (auto field : m_baseField)
-	{
-		if (field->checkValidator())
-		{
+		if (!field->checkValidator())
 			validate = false;
-		}
-	}
 	return validate;
 }
 //___________________
 void Form::fillForm()
 {
 	for (auto field : m_baseField)
-	{
-		field->readElement();
-	}
+		if (!field->getValid())
+			field->readElement();
 }

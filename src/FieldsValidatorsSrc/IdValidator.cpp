@@ -1,6 +1,6 @@
 #include "FieldsValidatorsInc/IDValidator.h"
 
-bool IDValidator::validate(const uint32_t& id, const uint32_t&)
+bool IDValidator::validate(const uint32_t& id)
 {
     std::string num = std::to_string(id);
     // Make sure ID is formatted properly

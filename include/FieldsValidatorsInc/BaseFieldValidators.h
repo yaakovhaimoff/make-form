@@ -6,6 +6,6 @@ class BaseFieldValidators
 public:
 	BaseFieldValidators(){}
 	virtual ~BaseFieldValidators() = default;
-	virtual bool validate(const T&, const T&) = 0;
+	virtual bool validate(const T&) = 0;
 
 };

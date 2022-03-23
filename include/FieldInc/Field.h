@@ -12,8 +12,8 @@ class Field : public BaseField
 public:
     Field(const std::string message) : BaseField(message){}
     void addValidator(const BaseFieldValidators<T>*);
-    bool checkValidator() {}
-    void readElement();
+    bool checkValidator();
+    void readElement() override;
 
 private:
     T m_element;

@@ -8,7 +8,7 @@ class MinValidator : public BaseFieldValidators<T>
 public:
     MinValidator(T element) : m_minElement(element){}
     //bool validate(const short&, const short&)override;
-    bool validate(const T&, const T&)override;
+    bool validate(const T&)override;
 
 private:
     T m_minElement;
@@ -21,7 +21,7 @@ private:
 //}
 //________________
 template <class T>
-bool MinValidator<T>::validate(const T& numOfCousre, const T&)
+bool MinValidator<T>::validate(const T& numOfCousre)
 {
     return m_minElement < numOfCousre;
 }

@@ -7,5 +7,5 @@ class IDValidator : public BaseFieldValidators<uint32_t>
 {
 public:
 	IDValidator() {}
-	bool validate(const uint32_t&, const uint32_t&)override;
+	bool validate(const uint32_t&)override;
 };
