@@ -24,5 +24,7 @@ void Form::fillForm()
 {
 	for (auto field : m_baseField)
 		if (!field->getValid())
+		{
 			field->readElement();
+		}
 }

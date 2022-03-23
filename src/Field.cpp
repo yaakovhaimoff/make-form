@@ -18,3 +18,15 @@ void Field<T>::readElement()
 	show();
 	std::cin >> m_element;
 }
+//________________
+template <class T>
+void Field<T>::printElement()const
+{
+	std::cout << m_element;
+}
+//________________
+template <class T>
+void Field<T>::printError()const
+{
+	m_validator->printError();
+}

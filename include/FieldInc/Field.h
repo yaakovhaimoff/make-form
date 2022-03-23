@@ -14,10 +14,12 @@ public:
     void addValidator(const BaseFieldValidators<T>*);
     bool checkValidator();
     void readElement() override;
-
+    void printElement()const;
+    void printError()const;
 private:
     T m_element;
     std::vector<BaseFieldValidators<T>*> m_validator;
+    //BaseFieldValidators<T>* m_validator;
 };
 //________________
 template <class T>

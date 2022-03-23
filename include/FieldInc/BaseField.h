@@ -13,6 +13,8 @@ public:
     virtual void readElement() = 0;
     virtual bool getValid()const { return m_valid; }
     virtual bool setValid(const bool valid) { m_valid = valid; }
+    virtual void printError()const = 0;
+    virtual void printElement()const = 0;
     virtual ~BaseField() = default;
 
 private:
