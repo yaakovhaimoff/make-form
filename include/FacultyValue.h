@@ -19,3 +19,4 @@ std::istream &operator>>(std::istream&, FacultyValue&);
 std::ostream& operator<<(std::ostream&, const FacultyValue&);
 bool operator <=(const FacultyValue&, const FacultyValue&);
 bool operator >=(const FacultyValue&, const FacultyValue&);
+bool operator ==(const FacultyValue&, const FacultyValue&);

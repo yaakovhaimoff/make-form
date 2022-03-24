@@ -21,8 +21,10 @@ bool Form::validateForm()
 	if (m_validForm)
 		for (auto formValidator : m_formValidators)
 			if (!formValidator->validateForm())
+			{
 				m_validForm = false;
-
+				break;
+			}
 	return m_validForm;
 }
 //___________________

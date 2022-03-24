@@ -7,7 +7,7 @@
 class BaseField
 {
 public:
-    BaseField(const std::string message) : m_message(message), m_valid(false) {}
+    BaseField(const std::string message) : m_message(message), m_valid(false){}
     void show() { std::cout << m_message; }
     virtual bool checkValidator() = 0;
     virtual void readElement() = 0;

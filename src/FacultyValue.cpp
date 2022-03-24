@@ -29,11 +29,18 @@ void FacultyValue::printName(std::string name)const
 {
 	std::cout << name;
 }
+//__________________________________________________________________
 bool operator <=(const FacultyValue& value, const FacultyValue& max)
 {
 	return value.getValue() <= max.getValue();
 }
+//__________________________________________________________________
 bool operator >=(const FacultyValue& value, const FacultyValue& min)
 {
 	return value.getValue() >= min.getValue();
+}
+//______________________________________________________________________
+bool operator ==(const FacultyValue& value1, const FacultyValue& value2)
+{
+	return value1.getValue() == value2.getValue();
 }
