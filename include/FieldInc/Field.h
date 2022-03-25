@@ -33,11 +33,9 @@ bool Field<T>::checkValidator()
 {
 	for (auto validator : m_validator)
 		if (validator->validate(m_element))
-		{
 			setValid(true);
-			return true;
-		}
-	return false;
+
+	return getValid();
 }
 //________________
 template <class T>

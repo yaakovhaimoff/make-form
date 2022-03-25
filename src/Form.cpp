@@ -13,15 +13,27 @@ void Form::addValidator(FormValidators* formValidator)
 //_______________________
 bool Form::validateForm()
 {
+	if (validateFields())
+		validateFormWithValidator();
+	return m_validForm;
+}
+//_________________________
+bool Form::validateFields()
+{
 	m_validForm = true;
 	for (auto field : m_baseField)
-		if (!field->checkValidator())
+		if (field->getValid())
+			continue;
+		else if (!field->checkValidator())
 			m_validForm = false;
-	if (m_validForm)
-		for (auto formValidator : m_formValidators)
-			if (!formValidator->validateForm())
-				m_validForm = false;
 	return m_validForm;
+}
+//____________________________________
+void Form::validateFormWithValidator()
+{
+	for (auto formValidator : m_formValidators)
+		if (!formValidator->validateForm())
+			m_validForm = false;
 }
 //___________________
 void Form::fillForm()
@@ -35,16 +47,33 @@ std::ostream& operator<<(std::ostream& output, const Form& form)
 {
 	for (size_t i = 0; i < form.fieldsNum(); i++)
 		form.printField(i);
+	form.printFormErrors();
 	return output;
 }
+//______________________________________
 void Form::printField(size_t place)const
 {
 	m_baseField[place]->show();
 	std::cout << " = ";
 	m_baseField[place]->printElement();
 
-	if (!m_baseField[place]->getValid())
-		m_baseField[place]->printError(); // error 
+	if (!m_baseField[place]->getValid() && checkFormValidators())
+		m_baseField[place]->printError(); // field error 
 	else
-		std::cout << std::endl << std::string(60, '-') << std::endl; // not error
+		std::cout << std::endl << std::string(64, '-') << std::endl; // no error
+}
+//___________________________________
+void Form::printFormErrors()const
+{
+	for (auto formValidator : m_formValidators)
+		if (formValidator->getFormValid())
+			formValidator->printFormError();
+}
+//___________________________________
+bool Form::checkFormValidators()const
+{
+	for (auto formValidator : m_formValidators)
+		if (formValidator->getFormValid())
+			return false;
+	return true;
 }

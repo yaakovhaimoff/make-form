@@ -11,8 +11,12 @@ public:
 	void addField(BaseField*);
 	void addValidator(FormValidators*);
 	bool validateForm();
+	bool validateFields();
+	void validateFormWithValidator();
+	bool checkFormValidators()const;
 	void fillForm();
 	void printField(size_t place)const;
+	void printFormErrors()const;
 	size_t fieldsNum()const { return m_baseField.size(); }
 	
 private:

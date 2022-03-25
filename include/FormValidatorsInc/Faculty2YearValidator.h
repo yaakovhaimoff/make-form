@@ -6,7 +6,7 @@ template <class T1, class T2>
 class Faculty2YearValidator : public FormValidators
 {
 public:
-	Faculty2YearValidator(T1* faculty, T2* year) : FormValidators("Faculty and year don't match"),
+	Faculty2YearValidator(T1* faculty, T2* year) : FormValidators("Faculty and year don't match\n"),
 		m_faculty(faculty), m_year(year) {}
 	bool validateForm() override;
 
@@ -22,9 +22,10 @@ bool Faculty2YearValidator<T1, T2>::validateForm()
 		(m_faculty->getElement() == Liteture && m_year->getElement() <= 3) ||
 		(m_faculty->getElement() == Medicine && m_year->getElement() == 7))
 	{
-		setFormValid(true);
+		setFormValid(false);
 		return true;
 	}
+	setFormValid(true);
 	m_faculty->setValid(false);
 	m_year->setValid(false);
 	return false;
