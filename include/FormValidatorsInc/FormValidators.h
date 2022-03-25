@@ -17,7 +17,7 @@ public:
 	FormValidators(std::string errorMessage) : m_errorMessage(errorMessage),
 		m_formValid(false) {}
 	void show()const { std::cout << m_errorMessage; }
-	virtual bool validateForm()const = 0;
+	virtual bool validateForm() = 0;
 	virtual bool getFormValid() { return m_formValid; }
 	virtual void setFormValid(const bool formValid) { m_formValid = formValid; }
 	virtual ~FormValidators() = default;
