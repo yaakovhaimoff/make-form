@@ -1,33 +1,38 @@
 #include "FacultyValue.h"
 
 //________________________________________________________________
-std::istream &operator>>(std::istream& input, FacultyValue& value)
+std::istream& operator>>(std::istream& input, FacultyValue& value)
 {
 	int num;
 	input >> num;
 	value.setValue(num);
 	return input;
 }
-//_______________________________________________________________________
-std::ostream& operator<<(std::ostream& output, const FacultyValue& value)
-{
-	output << value.getValue();
-	return output;
-}
 //__________________________________________
 void FacultyValue::setValue(const int value)
 {
 	m_value = value;
 }
-//_______________________________
-int FacultyValue::getValue()const
+//_______________________________________________________________________
+std::ostream& operator<<(std::ostream& output, const FacultyValue& value)
 {
-	return m_value;
+	output << value.getStrValue();
+	return output;
 }
-//_________________________________________________
-void FacultyValue::printName(std::string name)const
+//__________________________________________
+std::string FacultyValue::getStrValue()const
 {
-	std::cout << name;
+	switch (m_value)
+	{
+	case 1:
+		return "Computer Science";
+	case 2:
+		return "Medicine";
+	case 3:
+		return "Literature";
+	default:
+		return std::to_string(m_value);
+	}
 }
 //__________________________________________________________________
 bool operator <=(const FacultyValue& value, const FacultyValue& max)

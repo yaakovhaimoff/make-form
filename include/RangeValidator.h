@@ -1,22 +1,24 @@
 #pragma once
-#include "FieldsValidatorsInc/BaseFieldValidators.h"
+#include "BaseFieldValidator.h"
 #include "FacultyValue.h"
 
-// class template:
+// template class of Range Validator
 template <class T>
-class RangeValidator : public BaseFieldValidators<T>
+class RangeValidator : public BaseFieldValidator<T>
 {
 public:
 	RangeValidator(const T&, const T&);
 	bool validate(const T&)const;
 
 private:
-	T m_min, m_max;
+	T m_min = {}, m_max = {};
 };
+// Range Validator constructor
 //________________
 template <class T>
 RangeValidator<T>::RangeValidator(const T& min, const T& max)
-	: BaseFieldValidators<T>("Out of range\n"), m_min(min), m_max(max) {}
+	: BaseFieldValidator<T>("Out of range\n"), m_min(min), m_max(max)
+{}
 //________________
 template <class T>
 bool RangeValidator<T>::validate(const T& value)const

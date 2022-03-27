@@ -1,16 +1,15 @@
 #pragma once
-#include <vector>
-#include "FieldInc/BaseField.h"
-#include "FieldsValidatorsInc/BaseFieldValidators.h"
-#include <iostream>
+#include "BaseField.h"
+#include "BaseFieldValidator.h"
 
-// class template:
+// template Field class
 template <class T>
 class Field : public BaseField
 {
 public:
-	Field(const std::string message) : BaseField(message){}
-	void addValidator(BaseFieldValidators<T>*);
+	Field(const std::string message) : BaseField(message) {}
+
+	void addValidator(BaseFieldValidator<T>*);
 	bool checkValidator();
 	void readElement();
 	void printElement()const;
@@ -18,15 +17,17 @@ public:
 	T getElement()const { return m_element; }
 
 private:
-	T m_element {};
-	std::vector<BaseFieldValidators<T>*> m_validator;
+	T m_element = {};
+	std::vector<BaseFieldValidator<T>*> m_validator;
 };
-//________________
+
+// add new validator to field
 template <class T>
-void Field<T>::addValidator(BaseFieldValidators<T>* validator)
+void Field<T>::addValidator(BaseFieldValidator<T>* validator)
 {
 	m_validator.emplace_back(validator);
 }
+
 //________________
 template <class T>
 bool Field<T>::checkValidator()
@@ -37,6 +38,7 @@ bool Field<T>::checkValidator()
 
 	return getValid();
 }
+
 //________________
 template <class T>
 void Field<T>::readElement()
@@ -45,12 +47,14 @@ void Field<T>::readElement()
 	std::cout << std::endl;
 	std::cin >> m_element;
 }
+
 //________________
 template <class T>
 void Field<T>::printElement()const
 {
 	std::cout << m_element;
 }
+
 //________________
 template <class T>
 void Field<T>::printError()const

@@ -11,27 +11,27 @@
 #include "Form.h"
 
 // A class that represents a field. A field can have one or more validator
-#include "FieldInc/Field.h"
+#include "Field.h"
 
 // A class that represents a range validator.
 // It validates if a field value is in some range.
 // The type used as template parameter must implement < and > operators.
-#include "FieldsValidatorsInc/RangeValidator.h"
+#include "RangeValidator.h"
 
 // A class that represents a minimal value validator.
 // It validates if a field value is not less than some minimal value.
 // The type used as template parameter must implement > operator and support to_string() function.
-#include "FieldsValidatorsInc/MinValidator.h"
+#include "MinValidator.h"
 
 // A class that represents a no-digit-characters validator.
 // It validates that the field value contains no digits.
 // Works only on std::string.
-#include "FieldsValidatorsInc/NoDigitValidator.h"
+#include "NoDigitValidator.h"
 
 // A class that represents an ID validator.
 // ID validation is done using the control digit.
 // Works only on the type 'uint32_t'.
-#include "FieldsValidatorsInc/IDValidator.h"
+#include "IdValidator.h"
 
 // A class that represents the value use for faculty field.
 // The class must override the << and >> operators.
@@ -42,12 +42,12 @@
 // A class that represents a faculty-vs.-year validator.
 // It checks if the faculty and year supplied matches each other.
 // The types used as template parameter must be Field.
-#include "FormValidatorsInc/Faculty2YearValidator.h"
+#include "Faculty2YearValidator.h"
 
 // A class that represents a courses-vs.-year validator.
 // It checks if the course count and year supplied matches each other.
 // The types used as template parameter must be Field.
-#include "FormValidatorsInc/Courses2YearValidator.h"
+#include "Courses2YearValidator.h"
 
 //------------------- Function declarations ----------------------------
 
@@ -69,7 +69,7 @@ void clearScreen();
 // Utility function for getting current year from computer clock
 int currentYear();
 
-//___________________________ consts _______________________________
+//------------------- consts --------------------------
 
 const int MAX_POSSIBLE_YEAR = 7;
 const int MIN_AGE = 16;
@@ -77,11 +77,14 @@ const int MAX_AGE = 100;
 const int N_TIMES = 60;
 const std::string MESSAGE_LINE = '+' + std::string(N_TIMES, '-') + '+' + '\n';
 
-//___________________________ main_______________________________
+//------------------- main ----------------------------
+
 int main()
 {
     // Creating the form fields
     auto nameField = std::make_unique<Field<std::string>>("What is your name?");
+    // equivalent to:
+    // std::unique_ptr<Field<std::string>> nameField(new Field<std::string>("What is your name?"));
     auto idField = std::make_unique<Field<uint32_t>>("What is your ID?");
     auto yearOfBirthField = std::make_unique<Field<int>>("What is your year of birth?");
     auto facultyField = std::make_unique<Field<FacultyValue>>("What faculty are you registering to?\n"
@@ -148,48 +151,42 @@ int main()
     displayGoodbyeMessage();
     displayFormFields(myForm);
 }
-//______________________________________
 void displayFormFields(const Form& form)
 {
-	std::cout << form << '\n';
+    std::cout << form << '\n';
 }
-//__________________________
 void displayWelcomeMessage()
 {
-	std::cout << MESSAGE_LINE;
-	std::cout << std::format("|{:^60}|\n|{:^60}|\n",
-		"Hello and welcome!", "In order to register please fill in the fields below");
-	std::cout << MESSAGE_LINE;
+    std::cout << MESSAGE_LINE;
+    std::cout << std::format("|{:^60}|\n|{:^60}|\n",
+        "Hello and welcome!", "In order to register please fill in the fields below");
+    std::cout << MESSAGE_LINE;
 }
-//________________________
 void displayErrorMessage()
 {
-	std::cout << MESSAGE_LINE;
-	std::cout << std::format("|{:^60}|\n|{:^60}|\n",
-		"There was an error in at least one of the fields!", "Please correct the error(s)");
-	std::cout << MESSAGE_LINE;
+    std::cout << MESSAGE_LINE;
+    std::cout << std::format("|{:^60}|\n|{:^60}|\n",
+        "There was an error in at least one of the fields!", "Please correct the error(s)");
+    std::cout << MESSAGE_LINE;
 }
-//__________________________
 void displayGoodbyeMessage()
 {
-	std::cout << MESSAGE_LINE;
-	std::cout << std::format("|{:^60}|\n|{:^60}|\n",
-		"Thank you!", "This is the data you sent:");
-	std::cout << MESSAGE_LINE;
+    std::cout << MESSAGE_LINE;
+    std::cout << std::format("|{:^60}|\n|{:^60}|\n",
+        "Thank you!", "This is the data you sent:");
+    std::cout << MESSAGE_LINE;
 }
-//________________
 void clearScreen()
 {
 #ifdef WIN32
-	system("cls");
+    system("cls");
 #else
-	system("clear");
+    system("clear");
 #endif
 }
-//_______________
 int currentYear()
 {
-	namespace C = std::chrono;
-	auto ymd = C::year_month_day(C::floor<C::days>(C::system_clock::now()));
-	return static_cast<int>(ymd.year());
+    namespace C = std::chrono;
+    auto ymd = C::year_month_day(C::floor<C::days>(C::system_clock::now()));
+    return static_cast<int>(ymd.year());
 }

@@ -1,5 +1,6 @@
-#include "FieldsValidatorsInc/NoDigitValidator.h"
+#include "NoDigitValidator.h"
 
+// No digit validate of ID
 //___________________________________________________________
 bool NoDigitValidator::validate(const std::string& name)const
 {
